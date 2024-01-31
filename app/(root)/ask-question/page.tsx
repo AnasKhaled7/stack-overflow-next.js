@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 
 import Question from "@/components/forms/Question";
 import { getUserById } from "@/lib/actions/user.action";
-import console from "console";
 
 const Page = async () => {
   const { userId } = auth();
@@ -11,8 +10,6 @@ const Page = async () => {
   if (!userId) redirect("/sign-in");
 
   const mongoUser = await getUserById({ userId });
-
-  console.log(mongoUser);
 
   return (
     <div>
