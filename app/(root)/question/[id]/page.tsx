@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs";
 
 import { getQuestionById } from "@/lib/actions/question.action";
 import Metric from "@/components/shared/Metric";
@@ -7,9 +8,16 @@ import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import ParseHTML from "@/components/shared/ParseHTML";
 import RenderTag from "@/components/shared/RenderTag";
 import Answer from "@/components/forms/Answer";
+import { getUserById } from "@/lib/actions/user.action";
 
 const Page = async ({ params }: any) => {
   const result = await getQuestionById({ questionId: params.id });
+
+  const { userId: clerkId } = auth();
+
+  let mongoUser;
+
+  if (clerkId) mongoUser = await getUserById({ userId: clerkId });
 
   return (
     <>
@@ -76,7 +84,11 @@ const Page = async ({ params }: any) => {
         ))}
       </div>
 
-      <Answer />
+      <Answer
+        question={result.content}
+        questionId={JSON.stringify(result._id)}
+        authorId={JSON.stringify(mongoUser._id)}
+      />
     </>
   );
 };
