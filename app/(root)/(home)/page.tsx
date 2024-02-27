@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import LocalSearchbox from "@/components/shared/search/LocalSearchbox";
+import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
 import Filter from "@/components/shared/Filter";
 import { HomePageFilters } from "@/constants/filters";
 import HomeFilters from "@/components/home/HomeFilters";
@@ -25,7 +25,7 @@ export default async function Home() {
       </div>
 
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
-        <LocalSearchbox
+        <LocalSearchBar
           route="/"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
