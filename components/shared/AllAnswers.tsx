@@ -6,7 +6,6 @@ import Image from "next/image";
 import { getTimestamp } from "@/lib/utils";
 import ParseHTML from "./ParseHTML";
 import Votes from "./Votes";
-// import Votes from "./Votes";
 
 interface Props {
   questionId: string;
@@ -23,7 +22,11 @@ const AllAnswers = async ({
   page,
   filter,
 }: Props) => {
-  const result = await getAnswers({ questionId });
+  const result = await getAnswers({
+    questionId,
+    page: page ? +page : 1,
+    sortBy: filter,
+  });
 
   return (
     <div className="mt-11">
